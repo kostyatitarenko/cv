@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kostiantyn Tytarenko — Full-Stack Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0d0d0d;
+        --surface: #161616;
+        --border: #2a2a2a;
+        --accent: #e8c547;
+        --accent-dim: #a68b2a;
+        --text-primary: #f0ede6;
+        --text-secondary: #888580;
+        --text-muted: #4a4845;
+        --font-display: "Bebas Neue", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --font-mono: "DM Mono", monospace;
+        --toggle-bg: #222;
+        --toggle-border: #3a3a3a;
+        --toggle-knob: #e8c547;
+        --toggle-icon-moon: 1;
+        --toggle-icon-sun: 0;
+      }
+
+      html.light {
+        --bg: #f5f2ec;
+        --surface: #edeae3;
+        --border: #d8d4cb;
+        --accent: #b8921a;
+        --accent-dim: #9a7815;
+        --text-primary: #1a1916;
+        --text-secondary: #6b6760;
+        --text-muted: #b0ada8;
+        --toggle-bg: #e2dfd8;
+        --toggle-border: #c8c5be;
+        --toggle-knob: #b8921a;
+        --toggle-icon-moon: 0;
+        --toggle-icon-sun: 1;
+      }
+
+      html {
+        font-size: 14px;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-weight: 300;
+        line-height: 1.6;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background 0.35s ease,
+          color 0.35s ease;
+      }
+
+      /* ── THEME TOGGLE ── */
+      .theme-toggle {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toggle-label {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        transition: color 0.35s;
+        user-select: none;
+      }
+      .toggle-track {
+        position: relative;
+        width: 48px;
+        height: 26px;
+        background: var(--toggle-bg);
+        border: 1px solid var(--toggle-border);
+        border-radius: 13px;
+        cursor: pointer;
+        transition:
+          background 0.35s,
+          border-color 0.35s;
+        flex-shrink: 0;
+      }
+      .toggle-track:hover {
+        border-color: var(--accent-dim);
+      }
+      .toggle-knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--toggle-knob);
+        transition:
+          transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+          background 0.35s;
+      }
+      html.light .toggle-knob {
+        transform: translateX(22px);
+      }
+      .toggle-icon {
+        position: absolute;
+        top: 50%;
+        font-size: 11px;
+        line-height: 1;
+        transform: translateY(-50%);
+        transition: opacity 0.25s;
+        pointer-events: none;
+      }
+      .icon-moon {
+        left: 6px;
+        opacity: var(--toggle-icon-moon);
+      }
+      .icon-sun {
+        right: 5px;
+        opacity: var(--toggle-icon-sun);
+      }
+      @media print {
+        .theme-toggle {
+          display: none;
+        }
+      }
+
+      /* ── LAYOUT ── */
+      .page {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 60px 48px 80px;
+      }
+
+      /* ── HEADER ── */
+      .header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 24px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 48px;
+      }
+
+      .name-block {
+      }
+
+      .name-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        font-size: 80px;
+        line-height: 0.92;
+        letter-spacing: 0.01em;
+        color: var(--text-primary);
+        text-transform: uppercase;
+      }
+
+      h1 span {
+        display: block;
+        color: var(--text-secondary);
+        font-size: 52px;
+        letter-spacing: 0.02em;
+      }
+
+      .title-block {
+        text-align: right;
+      }
+
+      .role-tag {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--accent);
+        padding: 5px 14px;
+        margin-bottom: 12px;
+      }
+
+      .meta-list {
+        list-style: none;
+        text-align: right;
+      }
+
+      .meta-list li {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-secondary);
+        line-height: 1.9;
+        letter-spacing: 0.02em;
+      }
+
+      .meta-list a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .meta-list a:hover {
+        color: var(--accent);
+      }
+
+      /* ── GRID BODY ── */
+      .body-grid {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 0 56px;
+      }
+
+      /* ── SIDEBAR ── */
+      .sidebar {
+      }
+
+      .sidebar-section {
+        margin-bottom: 40px;
+      }
+
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .skill-group {
+        margin-bottom: 20px;
+      }
+
+      .skill-group-name {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .skill-list {
+        list-style: none;
+      }
+
+      .skill-list li {
+        font-family: var(--font-mono);
+        font-size: 11.5px;
+        color: var(--text-secondary);
+        padding: 3px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .skill-list li::before {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 1px;
+        background: var(--accent-dim);
+        flex-shrink: 0;
+      }
+
+      .skill-list li.primary {
+        color: var(--text-primary);
+        font-weight: 400;
+      }
+
+      .stat-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+
+      .stat-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+
+      .stat-value {
+        font-family: var(--font-display);
+        font-size: 28px;
+        color: var(--accent);
+        line-height: 1;
+      }
+
+      .lang-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .lang-item:last-child {
+        border-bottom: none;
+      }
+
+      .lang-name {
+        font-size: 12px;
+        color: var(--text-primary);
+      }
+
+      .lang-level {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ── MAIN ── */
+      .main {
+      }
+
+      .main-section {
+        margin-bottom: 48px;
+      }
+
+      .main-section-label {
+        font-family: var(--font-mono);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .summary {
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: var(--text-secondary);
+        font-weight: 300;
+        max-width: 580px;
+      }
+
+      .summary strong {
+        color: var(--text-primary);
+        font-weight: 400;
+      }
+
+      .achievement-list {
+        list-style: none;
+        margin: 0 0 14px;
+      }
+
+      .achievement-list li {
+        position: relative;
+        padding-left: 14px;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.65;
+      }
+
+      .achievement-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-dim);
+      }
+
+      .achievement-list strong {
+        color: var(--text-primary);
+        font-weight: 400;
+      }
+
+      /* Experience item */
+      .exp-item {
+        padding-bottom: 32px;
+        margin-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .exp-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 2px;
+        height: calc(100% - 36px);
+        background: var(--border);
+      }
+
+      .exp-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .exp-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: start;
+        gap: 12px;
+        margin-bottom: 4px;
+      }
+
+      .exp-company {
+        font-family: var(--font-display);
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+
+      .exp-period {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        text-align: right;
+        white-space: nowrap;
+        padding-top: 4px;
+      }
+
+      .exp-role {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-dim);
+        margin-bottom: 12px;
+      }
+
+      .exp-company a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .exp-company a:hover {
+        color: var(--accent);
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 7px;
+        margin-top: 14px;
+      }
+
+      .project-label,
+      .project-links a {
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .project-label {
+        color: var(--accent-dim);
+        margin-right: 4px;
+      }
+
+      .project-links a {
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 3px 9px;
+        text-decoration: none;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      .project-links a:hover {
+        border-color: var(--accent-dim);
+        color: var(--accent);
+      }
+
+      .project-more {
+        display: contents;
+      }
+
+      .project-more summary {
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        border: 1px solid var(--accent-dim);
+        padding: 3px 9px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      .project-more summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .project-more summary:hover {
+        border-color: var(--accent);
+        color: var(--text-primary);
+      }
+
+      .project-more[open] summary {
+        margin-right: 100%;
+      }
+
+      .project-more-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 7px;
+        width: 100%;
+      }
+
+      /* Education */
+      .edu-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .edu-item:last-child {
+        border-bottom: none;
+      }
+
+      .edu-degree {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--text-primary);
+        margin-bottom: 3px;
+      }
+
+      .edu-school {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+
+      .edu-year {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-muted);
+        text-align: right;
+        padding-top: 2px;
+      }
+
+      /* Divider */
+      .divider {
+        width: 32px;
+        height: 2px;
+        background: var(--accent);
+        margin: 6px 0 16px;
+      }
+
+      /* Print */
+      @media print {
+        html,
+        html.light {
+          --bg: #fff;
+          --surface: #f8f8f8;
+          --border: #ddd;
+          --accent: #b8921a;
+          --accent-dim: #9a7815;
+          --text-primary: #111;
+          --text-secondary: #555;
+          --text-muted: #999;
+        }
+        .page {
+          padding: 30px 36px 40px;
+        }
+        h1 {
+          font-size: 60px;
+        }
+        h1 span {
+          font-size: 40px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          padding: 32px 24px 48px;
+        }
+        .header {
+          grid-template-columns: 1fr;
+        }
+        .title-block {
+          text-align: left;
+        }
+        .meta-list {
+          text-align: left;
+        }
+        h1 {
+          font-size: 52px;
+        }
+        h1 span {
+          font-size: 36px;
+        }
+        .body-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+      <span class="toggle-label" id="theme-label">Light</span>
+      <div class="toggle-track">
+        <div class="toggle-knob"></div>
+        <span class="toggle-icon icon-moon">🌙</span>
+        <span class="toggle-icon icon-sun">☀️</span>
+      </div>
+    </div>
+
+    <div class="page">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="name-block">
+          <div class="name-label">Curriculum Vitae</div>
+          <h1>Kostiantyn<span>Tytarenko</span></h1>
+        </div>
+        <div class="title-block">
+          <div class="role-tag">Full-Stack Web Developer</div>
+          <ul class="meta-list">
+            <li>Ukraine</li>
+            <li>
+              <a href="mailto:kos.tytarenko@gmail.com"
+                >kos.tytarenko@gmail.com</a
+              >
+            </li>
+            <!-- <li>
+              <a href="https://linkedin.com/in/tytarenko" target="_blank"
+                >linkedin.com/in/tytarenko</a
+              >
+            </li> -->
+            <li>
+              <a href="https://github.com/kostyatitarenko" target="_blank"
+                >github.com/kostyatitarenko</a
+              >
+            </li>
+            <li>Phone available on request</li>
+          </ul>
+        </div>
+      </header>
+
+      <!-- BODY GRID -->
+      <div class="body-grid">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+          <div class="sidebar-section">
+            <div class="section-label">Stats</div>
+            <div class="stat-row">
+              <span class="stat-label">IT Experience</span>
+              <span class="stat-value">10Y+</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Products</span>
+              <span class="stat-value">10+</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Projects</span>
+              <span class="stat-value">50+</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="section-label">Core Stack</div>
+            <div class="skill-group">
+              <div class="skill-group-name">Frontend</div>
+              <ul class="skill-list">
+                <li class="primary">JavaScript / TypeScript</li>
+                <li class="primary">Vue 3 / Nuxt 4</li>
+                <li>Redux / Zustand / Pinia</li>
+                <li>React / Next.js when needed</li>
+                <li>WordPress</li>
+                <li>SCSS / CSS Architecture</li>
+                <li>Web Vitals / Accessibility</li>
+                <li>Capacitor</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-name">Backend</div>
+              <ul class="skill-list">
+                <li class="primary">Node.js / Nitro</li>
+                <li class="primary">NestJS / Fastify / Express</li>
+                <li>REST API / GraphQL</li>
+                <li>PostgreSQL / MongoDB</li>
+                <li>Redis</li>
+              </ul>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-name">Tooling & Ops</div>
+              <ul class="skill-list">
+                <li>Docker / CI/CD</li>
+                <li>Git / GitHub Actions</li>
+                <li>Codex</li>
+                <li>Vite / Webpack</li>
+                <li>Jest / Vitest / Playwright</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="section-label">Architecture</div>
+            <ul class="skill-list">
+              <li>Feature-Sliced Design</li>
+              <li>Micro-frontends</li>
+              <li>SSR / SSG / ISR</li>
+              <li>Design Systems</li>
+              <li>Performance Optimization</li>
+              <li>Mentoring / Code Review</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="section-label">Strengths</div>
+            <ul class="skill-list">
+              <li>Product-minded delivery</li>
+              <li>Clean scalable architecture</li>
+              <li>Fast onboarding for teams</li>
+              <li>Reliable release processes</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <div class="section-label">Languages</div>
+            <div class="lang-item">
+              <span class="lang-name">Ukrainian</span>
+              <span class="lang-level">Native</span>
+            </div>
+            <div class="lang-item">
+              <span class="lang-name">Russian</span>
+              <span class="lang-level">Native</span>
+            </div>
+            <div class="lang-item">
+              <span class="lang-name">English</span>
+              <span class="lang-level">Intermediate</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+          <!-- SUMMARY -->
+          <section class="main-section">
+            <div class="main-section-label">Profile</div>
+            <p class="summary">
+              Full-Stack Web Developer with
+              <strong>10+ years of commercial experience</strong> turning
+              complex product requirements into fast, maintainable web
+              platforms. Strong in
+              <strong
+                >Vue/Nuxt, TypeScript, Node.js, and modern backend
+                frameworks</strong
+              >, with a track record across SaaS, e-commerce, dashboards, design
+              systems, and CMS-driven products. I combine architecture
+              ownership, hands-on delivery, performance work, mentoring, and
+              pragmatic product thinking, so teams can ship faster without
+              accumulating chaos. My engineering and economics background adds
+              systems thinking, process discipline, and practical business
+              awareness.
+            </p>
+          </section>
+
+          <!-- EXPERIENCE -->
+          <section class="main-section">
+            <div class="main-section-label">IT Experience</div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://thecookielabs.com/" target="_blank"
+                    >The Cookie Labs</a
+                  >
+                </div>
+                <div class="exp-period">2021 — 2026</div>
+              </div>
+              <div class="exp-role">JavaScript / Vue / Nuxt Developer</div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Built and maintained production websites, donation shops,
+                    campaign platforms, and product experiences</strong
+                  >
+                  for German and international brands.
+                </li>
+                <li>
+                  <strong
+                    >Worked across Vue/Nuxt, JavaScript, TypeScript, SCSS,
+                    WordPress, APIs, and e-commerce flows</strong
+                  >, depending on product needs.
+                </li>
+                <li>
+                  <strong
+                    >Delivered responsive, accessible, performance-conscious
+                    interfaces</strong
+                  >
+                  with careful QA across desktop, mobile, and content-heavy
+                  pages.
+                </li>
+                <li>
+                  <strong
+                    >Integrated CMS, donation, fundraising, and marketing
+                    workflows</strong
+                  >
+                  for clients with strict brand and reliability expectations.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://www.meersburg-therme.de/" target="_blank"
+                  >Meersburg Therme</a
+                >
+                <a href="https://www.progenium.com/" target="_blank"
+                  >Progenium</a
+                >
+                <a href="https://www.cbm.de/geschenkspende/" target="_blank"
+                  >CBM</a
+                >
+                <a
+                  href="https://spendenshop.aga-artenschutz.de/"
+                  target="_blank"
+                  >AGA</a
+                >
+                <a href="https://www.nxt-a.de/" target="_blank">NXT A</a>
+                <a href="https://www.superga.com/" target="_blank">Superga</a>
+                <a href="https://www.sebago.com/" target="_blank">Sebago</a>
+                <a href="https://globalecology.group/" target="_blank"
+                  >Global Ecology Group</a
+                >
+                <a href="https://www.menschenfuermenschen.de/" target="_blank"
+                  >MFM</a
+                >
+                <a href="https://toposmagazine.com/" target="_blank"
+                  >Topos Magazine</a
+                >
+                <a href="https://unwomen.de/" target="_blank">UN Women</a>
+                <a href="https://fundraisingbox.com/" target="_blank"
+                  >Online Fundraising</a
+                >
+                <a href="https://avantgarde-acoustic.de/" target="_blank"
+                  >Avantgarde Acoustic</a
+                >
+                <a href="https://freii.de/" target="_blank">Freii</a>
+                <a href="https://app.freii.de/" target="_blank">App.Freii</a>
+                <a href="https://fcbb-kids.de/" target="_blank">FCBB</a>
+                <details class="project-more">
+                  <summary>+ more projects</summary>
+                  <div class="project-more-list">
+                    <a
+                      href="https://hilfsgut.aerzte-ohne-grenzen.at/"
+                      target="_blank"
+                      >AOG</a
+                    >
+                    <a href="https://www.delphinschutz.org/" target="_blank"
+                      >GRD</a
+                    >
+                    <a href="https://www.emp-assets.com/" target="_blank"
+                      >EMP</a
+                    >
+                    <a href="https://www.inpro-consulting.de/" target="_blank"
+                      >INPROCON</a
+                    >
+                    <a href="https://nowherearchitekten.de/" target="_blank"
+                      >No Where Architekten</a
+                    >
+                    <a href="https://monteemare.immo/" target="_blank"
+                      >Monte e Mare</a
+                    >
+                    <a
+                      href="https://bschmid-personalberatung.de/"
+                      target="_blank"
+                      >Barbara Schmid</a
+                    >
+                    <a
+                      href="https://thebestnightsofyourlife.de/"
+                      target="_blank"
+                      >Jaegermeister</a
+                    >
+                    <a
+                      href="https://fundraising.frauenkirche-dresden.de/"
+                      target="_blank"
+                      >Frauenkirche Dresden</a
+                    >
+                    <a href="https://zaepfleweg.rothaus.de/" target="_blank"
+                      >Rothaus</a
+                    >
+                    <a href="https://www.lago-konstanz.de/" target="_blank"
+                      >LAGO Konstanz</a
+                    >
+                    <a href="https://engel-zimmermann.de/" target="_blank"
+                      >Engel &amp; Zimmermann</a
+                    >
+                    <a href="https://groeme-kaffee.de/" target="_blank"
+                      >Scanomat</a
+                    >
+                    <a href="https://saim.de/" target="_blank">SAIM</a>
+                    <a href="https://derkom.de/" target="_blank">DERKOM</a>
+                    <a href="https://www.vivascope.com/" target="_blank"
+                      >VivaScope</a
+                    >
+                    <a href="https://www.schindlerparent.de/" target="_blank"
+                      >Schindler Parent</a
+                    >
+                    <a href="https://iaa.schnizzl.io/" target="_blank">IAA</a>
+                    <a href="https://www.eisenfunk.de/" target="_blank"
+                      >Eisenfunk</a
+                    >
+                    <a href="https://bebplus.de/" target="_blank"
+                      >BEB Plus Immobilien</a
+                    >
+                    <a href="https://www.om-gruppe.de/" target="_blank"
+                      >Obermaier Gruppe</a
+                    >
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://upstaff.com/" target="_blank">Upstaff</a>
+                </div>
+                <div class="exp-period">2021 — 2025</div>
+              </div>
+              <div class="exp-role">Product Developer</div>
+              <ul class="achievement-list">
+                <li>
+                  <strong>Worked on product-facing frontend features</strong>
+                  for a talent and staffing platform.
+                </li>
+                <li>
+                  <strong
+                    >Contributed to UI flows, reusable components, and product
+                    improvements</strong
+                  >
+                  across candidate, client, and internal user journeys.
+                </li>
+                <li>
+                  <strong
+                    >Collaborated with product and engineering
+                    stakeholders</strong
+                  >
+                  to keep implementation aligned with business priorities.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://upstaff.com/" target="_blank"
+                  >Upstaff Product</a
+                >
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://dmd-binary.com" target="_blank"
+                    >DMD Binary</a
+                  >
+                </div>
+                <div class="exp-period">2019 — 2021</div>
+              </div>
+              <div class="exp-role">
+                Front-end Developer | JS / React / Vue Developer
+              </div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Delivered frontend features for product and client
+                    platforms</strong
+                  >
+                  using JavaScript, React, Vue, HTML, CSS, and API integrations.
+                </li>
+                <li>
+                  <strong
+                    >Built responsive interfaces and interactive product
+                    flows</strong
+                  >
+                  across raffle, wallet, e-commerce, booking, and medical
+                  websites.
+                </li>
+                <li>
+                  <strong
+                    >Worked with mixed stacks and legacy constraints</strong
+                  >, balancing delivery speed with maintainability.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://raffall.com/en" target="_blank">Raffall</a>
+                <a href="https://www.zenwallet.ca/" target="_blank"
+                  >ZenzaWallet</a
+                >
+                <a href="https://shs100.com/" target="_blank"
+                  >Specialist Herbal Supplies</a
+                >
+                <a href="https://kravtsova.roomus.com.ua/" target="_blank"
+                  >Book a room</a
+                >
+                <a href="https://mikamed.com.ua/" target="_blank">Mikamed</a>
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://boost.solutions" target="_blank"
+                    >BoostSolutions</a
+                  >
+                </div>
+                <div class="exp-period">2018 — 2019</div>
+              </div>
+              <div class="exp-role">
+                Front-end Developer | WordPress Developer
+              </div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Developed client-facing WordPress and frontend
+                    features</strong
+                  >
+                  with a focus on responsive layouts, CMS flexibility, and clean
+                  handoff.
+                </li>
+                <li>
+                  <strong>Supported agency delivery</strong> from page
+                  implementation through QA and production updates.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://vevolve.com/" target="_blank">Vevolve</a>
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://www.jet-brain.com" target="_blank"
+                    >JetBrain</a
+                  >
+                </div>
+                <div class="exp-period">2017 — 2018</div>
+              </div>
+              <div class="exp-role">
+                Front-end Developer | WordPress Developer
+              </div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Built and maintained WordPress websites, marketing pages,
+                    and business sites</strong
+                  >
+                  for Ukrainian and international clients.
+                </li>
+                <li>
+                  <strong
+                    >Implemented responsive layouts, content modules, and
+                    frontend interactions</strong
+                  >
+                  across corporate, education, legal, and commodity-sector
+                  projects.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://www.kernel.ua" target="_blank">KERNEL</a>
+                <a href="http://notagroup.com.ua/" target="_blank"
+                  >Nota Group</a
+                >
+                <a href="https://amcenters.com/" target="_blank">AMC</a>
+                <a href="https://it-solutions.ua" target="_blank"
+                  >IT-Solutions</a
+                >
+                <a href="https://waveofenglish.com.ua/" target="_blank"
+                  >Wave of English</a
+                >
+                <a href="https://averecommodities.com/" target="_blank"
+                  >Avere Commodities</a
+                >
+                <a href="https://eu.ergomotion.com/" target="_blank"
+                  >Ergomotion</a
+                >
+                <a href="https://lcf.ua/" target="_blank">LCF Law Group</a>
+                <a href="http://case-ukraine.com.ua/" target="_blank"
+                  >CASE Ukraine</a
+                >
+                <a href="https://cost.ua/" target="_blank"
+                  >CASE Ukraine Project</a
+                >
+              </div>
+            </div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://fleek.marketing/" target="_blank"
+                    >Fleek Marketing</a
+                  >
+                </div>
+                <div class="exp-period">2016 — 2017</div>
+              </div>
+              <div class="exp-role">
+                Front-end Developer | WordPress Developer
+              </div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Delivered WordPress websites and front-end builds</strong
+                  >
+                  for UK clients across hospitality, healthcare, science,
+                  bridal, and veterinary domains.
+                </li>
+                <li>
+                  <strong
+                    >Created responsive page templates, content sections, and
+                    cross-browser UI fixes</strong
+                  >
+                  for agency-managed client websites.
+                </li>
+              </ul>
+              <div class="project-links">
+                <span class="project-label">Projects</span>
+                <a href="https://www.sunpavilion.co.uk/" target="_blank"
+                  >The Sun Pavilion</a
+                >
+                <a href="https://venusbridal.co.uk/" target="_blank"
+                  >Venus Bridal</a
+                >
+                <a href="https://weetwood.co.uk/" target="_blank"
+                  >Weetwood Hall</a
+                >
+                <a href="https://sleepcouncil.org.uk/" target="_blank"
+                  >The Sleep Council</a
+                >
+                <a href="https://axonics.com" target="_blank"
+                  >Advancing Science for Life</a
+                >
+                <a href="https://wylievets.com/" target="_blank">Wylie Vets</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- EARLIER ENGINEERING CAREER -->
+          <section class="main-section">
+            <div class="main-section-label">Earlier Engineering Career</div>
+
+            <div class="exp-item">
+              <div class="exp-header">
+                <div class="exp-company">
+                  <a href="https://www.nkmz.com" target="_blank">NKMZ</a>
+                </div>
+                <div class="exp-period">2011 — 2017</div>
+              </div>
+              <div class="exp-role">
+                Workshop Supervisor | Metal Structures Manufacturing
+              </div>
+              <ul class="achievement-list">
+                <li>
+                  <strong
+                    >Managed production work on a metal structures manufacturing
+                    site</strong
+                  >
+                  at a large machine-building plant.
+                </li>
+                <li>
+                  <strong
+                    >Coordinated people, process discipline, quality
+                    expectations, and delivery schedules</strong
+                  >
+                  in a high-responsibility industrial environment.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- EDUCATION -->
+          <section class="main-section">
+            <div class="main-section-label">Education</div>
+
+            <div class="edu-item">
+              <div>
+                <div class="edu-degree">Welding Engineer</div>
+                <div class="edu-school">
+                  Donbass State Academy — Faculty of Mechanical Engineering
+                </div>
+              </div>
+              <div class="edu-year">2006 — 2011</div>
+            </div>
+
+            <div class="edu-item">
+              <div>
+                <div class="edu-degree">Enterprise Economics Specialist</div>
+                <div class="edu-school">
+                  Donbass State Academy — Faculty of Economics
+                </div>
+              </div>
+              <div class="edu-year">2008 — 2012</div>
+            </div>
+
+            <div class="edu-item">
+              <div>
+                <div class="edu-degree">
+                  Self-directed Software Engineering Education
+                </div>
+                <div class="edu-school">
+                  Books, documentation, online courses, YouTube, and production
+                  practice
+                </div>
+              </div>
+              <div class="edu-year">2012 — Present</div>
+            </div>
+          </section>
+        </main>
+      </div>
+      <!-- /body-grid -->
+    </div>
+    <!-- /page -->
+
+    <script>
+      const label = document.getElementById("theme-label");
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle("light");
+        label.textContent = isLight ? "Dark" : "Light";
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+      }
+      (function () {
+        const saved = localStorage.getItem("theme");
+        if (saved === "light") {
+          document.documentElement.classList.add("light");
+          label.textContent = "Dark";
+        }
+      })();
+    </script>
+  </body>
+</html>
