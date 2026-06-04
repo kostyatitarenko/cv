@@ -277,6 +277,33 @@
         color: var(--accent);
       }
 
+      .download-cv {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 14px;
+        border: 1px solid var(--accent-dim);
+        background: transparent;
+        color: var(--accent);
+        padding: 7px 13px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        line-height: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      .download-cv:hover {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--bg);
+      }
+
       /* ── GRID BODY ── */
       .body-grid {
         display: grid;
@@ -661,6 +688,9 @@
         .page {
           padding: 30px 36px 40px;
         }
+        .download-cv {
+          display: none;
+        }
         h1 {
           font-size: 60px;
         }
@@ -732,6 +762,12 @@
             </li>
             <li>Phone available on request</li>
           </ul>
+          <a
+            class="download-cv"
+            href="kostiantyn-tytarenko-cv.pdf"
+            download
+            >Download CV</a
+          >
         </div>
       </header>
 
