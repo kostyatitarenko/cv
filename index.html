@@ -764,6 +764,7 @@
           </ul>
           <a
             class="download-cv"
+            id="download-cv"
             href="kostiantyn-tytarenko-cv.pdf"
             download
             >Download CV</a
@@ -1351,10 +1352,20 @@
 
     <script>
       const label = document.getElementById("theme-label");
+      const downloadCv = document.getElementById("download-cv");
+      const darkPdf = "kostiantyn-tytarenko-cv.pdf";
+      const lightPdf = "kostiantyn-tytarenko-cv-light.pdf";
+
+      function syncDownloadCv() {
+        const isLight = document.documentElement.classList.contains("light");
+        downloadCv.href = isLight ? lightPdf : darkPdf;
+      }
+
       function toggleTheme() {
         const isLight = document.documentElement.classList.toggle("light");
         label.textContent = isLight ? "Dark" : "Light";
         localStorage.setItem("theme", isLight ? "light" : "dark");
+        syncDownloadCv();
       }
       (function () {
         const saved = localStorage.getItem("theme");
@@ -1362,6 +1373,7 @@
           document.documentElement.classList.add("light");
           label.textContent = "Dark";
         }
+        syncDownloadCv();
       })();
     </script>
   </body>
