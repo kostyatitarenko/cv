@@ -82,8 +82,8 @@
         --accent: #e8c547;
         --accent-dim: #a68b2a;
         --text-primary: #f0ede6;
-        --text-secondary: #888580;
-        --text-muted: #4a4845;
+        --text-secondary: #a19d94;
+        --text-muted: #65615b;
         --font-display: "Bebas Neue", sans-serif;
         --font-body: "DM Sans", sans-serif;
         --font-mono: "DM Mono", monospace;
@@ -101,8 +101,8 @@
         --accent: #b8921a;
         --accent-dim: #9a7815;
         --text-primary: #1a1916;
-        --text-secondary: #6b6760;
-        --text-muted: #b0ada8;
+        --text-secondary: #56524b;
+        --text-muted: #918c84;
         --toggle-bg: #e2dfd8;
         --toggle-border: #c8c5be;
         --toggle-knob: #b8921a;
@@ -117,8 +117,8 @@
         background: var(--bg);
         color: var(--text-primary);
         font-family: var(--font-body);
-        font-weight: 300;
-        line-height: 1.6;
+        font-weight: 400;
+        line-height: 1.62;
         min-height: 100vh;
         -webkit-font-smoothing: antialiased;
         transition:
@@ -201,9 +201,9 @@
 
       /* ── LAYOUT ── */
       .page {
-        max-width: 960px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: 60px 48px 80px;
+        padding: 56px 48px 80px;
       }
 
       /* ── HEADER ── */
@@ -212,9 +212,9 @@
         grid-template-columns: 1fr auto;
         align-items: end;
         gap: 24px;
-        padding-bottom: 32px;
+        padding-bottom: 30px;
         border-bottom: 1px solid var(--border);
-        margin-bottom: 48px;
+        margin-bottom: 44px;
       }
 
       .name-block {
@@ -231,17 +231,18 @@
 
       h1 {
         font-family: var(--font-display);
-        font-size: 80px;
+        font-size: 72px;
         line-height: 0.92;
         letter-spacing: 0.01em;
         color: var(--text-primary);
         text-transform: uppercase;
+        text-wrap: balance;
       }
 
       h1 span {
         display: block;
         color: var(--text-secondary);
-        font-size: 52px;
+        font-size: 46px;
         letter-spacing: 0.02em;
       }
 
@@ -314,8 +315,8 @@
       /* ── GRID BODY ── */
       .body-grid {
         display: grid;
-        grid-template-columns: 220px 1fr;
-        gap: 0 56px;
+        grid-template-columns: 224px minmax(0, 1fr);
+        gap: 0 52px;
       }
 
       /* ── SIDEBAR ── */
@@ -323,7 +324,7 @@
       }
 
       .sidebar-section {
-        margin-bottom: 40px;
+        margin-bottom: 36px;
       }
 
       .section-label {
@@ -356,7 +357,7 @@
 
       .skill-list li {
         font-family: var(--font-mono);
-        font-size: 11.5px;
+        font-size: 12px;
         color: var(--text-secondary);
         padding: 3px 0;
         display: flex;
@@ -435,7 +436,7 @@
       }
 
       .main-section {
-        margin-bottom: 48px;
+        margin-bottom: 44px;
       }
 
       .main-section-label {
@@ -450,11 +451,12 @@
       }
 
       .summary {
-        font-size: 14.5px;
-        line-height: 1.75;
+        font-size: 15px;
+        line-height: 1.72;
         color: var(--text-secondary);
-        font-weight: 300;
-        max-width: 580px;
+        font-weight: 400;
+        max-width: 600px;
+        text-wrap: pretty;
       }
 
       .summary strong {
@@ -470,10 +472,11 @@
       .achievement-list li {
         position: relative;
         padding-left: 14px;
-        margin-bottom: 8px;
-        font-size: 13px;
+        margin-bottom: 7px;
+        font-size: 14px;
         color: var(--text-secondary);
-        line-height: 1.65;
+        line-height: 1.62;
+        text-wrap: pretty;
       }
 
       .achievement-list li::before {
@@ -494,8 +497,8 @@
 
       /* Experience item */
       .exp-item {
-        padding-bottom: 32px;
-        margin-bottom: 32px;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
         border-bottom: 1px solid var(--border);
         position: relative;
         padding-left: 20px;
@@ -572,7 +575,7 @@
       .project-label,
       .project-links a {
         font-family: var(--font-mono);
-        font-size: 9.5px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
@@ -604,7 +607,7 @@
       .project-more summary {
         list-style: none;
         font-family: var(--font-mono);
-        font-size: 9.5px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         color: var(--accent);
@@ -699,10 +702,10 @@
           display: none;
         }
         h1 {
-          font-size: 60px;
+          font-size: 56px;
         }
         h1 span {
-          font-size: 40px;
+          font-size: 38px;
         }
       }
 
@@ -720,10 +723,10 @@
           text-align: left;
         }
         h1 {
-          font-size: 52px;
+          font-size: 48px;
         }
         h1 span {
-          font-size: 36px;
+          font-size: 34px;
         }
         .body-grid {
           grid-template-columns: 1fr;
