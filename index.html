@@ -1761,7 +1761,7 @@
           requestedTheme === "dark" || requestedTheme === "light"
             ? requestedTheme
             : localStorage.getItem("theme");
-        if (saved === "dark") {
+        if (saved !== "light") {
           document.documentElement.classList.add("dark");
           label.textContent = "Light";
         } else {
