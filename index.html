@@ -741,17 +741,373 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* Editorial recruiter-first redesign */
+      :root {
+        --bg: #f4f2ed;
+        --surface: #ebe8e1;
+        --border: #d3cec4;
+        --accent: #a33d2b;
+        --accent-dim: #8c5145;
+        --text-primary: #20211f;
+        --text-secondary: #565851;
+        --text-muted: #85867f;
+        --toggle-bg: #dedad2;
+        --toggle-border: #c8c2b7;
+        --toggle-knob: #a33d2b;
+      }
+
+      html.dark {
+        --bg: #171815;
+        --surface: #21221e;
+        --border: #383a34;
+        --accent: #d87661;
+        --accent-dim: #b76b5b;
+        --text-primary: #f1efe9;
+        --text-secondary: #b8b6ae;
+        --text-muted: #7f8079;
+        --toggle-bg: #2a2b27;
+        --toggle-border: #454640;
+        --toggle-knob: #d87661;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          color-mix(in srgb, var(--text-primary) 7%, transparent) 1px,
+          transparent 0
+        );
+        background-size: 24px 24px;
+      }
+
+      .page {
+        max-width: 1120px;
+        padding: 64px 64px 96px;
+      }
+
+      .header {
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        align-items: start;
+        gap: 56px;
+        margin-bottom: 52px;
+        padding-bottom: 38px;
+        border-bottom: 2px solid var(--text-primary);
+      }
+
+      .name-label,
+      .section-label,
+      .main-section-label {
+        letter-spacing: 0.14em;
+      }
+
+      .name-label {
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+
+      h1 {
+        max-width: 660px;
+        font-size: clamp(62px, 8vw, 96px);
+        line-height: 0.82;
+        letter-spacing: 0;
+      }
+
+      h1 span {
+        margin-top: 8px;
+        font-size: 0.72em;
+        color: var(--text-secondary);
+        letter-spacing: 0;
+      }
+
+      .title-block {
+        text-align: left;
+        padding-top: 22px;
+      }
+
+      .role-tag {
+        display: block;
+        max-width: 440px;
+        margin-bottom: 22px;
+        padding: 0;
+        background: transparent;
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .role-stack {
+        display: block;
+        margin-top: 4px;
+        color: var(--text-secondary);
+        font-size: 0.78em;
+        font-weight: 500;
+      }
+
+      .meta-list,
+      .meta-list li {
+        text-align: left;
+      }
+
+      .meta-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4px 18px;
+      }
+
+      .meta-list li {
+        line-height: 1.6;
+      }
+
+      .download-cv {
+        margin-top: 20px;
+        border-color: var(--text-primary);
+        color: var(--text-primary);
+        padding: 9px 14px;
+      }
+
+      .body-grid {
+        grid-template-columns: 238px minmax(0, 1fr);
+        gap: 0 64px;
+      }
+
+      .sidebar {
+        padding-right: 28px;
+        border-right: 1px solid var(--border);
+      }
+
+      .sidebar-section {
+        margin-bottom: 32px;
+      }
+
+      .section-label,
+      .main-section-label {
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+        color: var(--accent);
+      }
+
+      .stat-row {
+        padding: 11px 0;
+      }
+
+      .stat-value {
+        font-size: 32px;
+        color: var(--text-primary);
+      }
+
+      .skill-list li {
+        gap: 9px;
+        padding: 4px 0;
+        font-family: var(--font-body);
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .skill-list li::before {
+        width: 10px;
+        background: var(--accent-dim);
+      }
+
+      .main-section {
+        margin-bottom: 52px;
+      }
+
+      .main-section-label {
+        margin-bottom: 24px;
+        font-size: 10px;
+      }
+
+      .summary {
+        max-width: 680px;
+        font-size: 17px;
+        line-height: 1.68;
+      }
+
+      .summary strong,
+      .achievement-list strong {
+        font-weight: 600;
+      }
+
+      .achievement-list li {
+        padding-left: 18px;
+        margin-bottom: 10px;
+        line-height: 1.58;
+      }
+
+      .achievement-list li::before {
+        top: 9px;
+        width: 6px;
+        height: 6px;
+        border-radius: 0;
+        background: var(--accent);
+      }
+
+      .exp-item {
+        margin-bottom: 36px;
+        padding: 0 0 34px 30px;
+      }
+
+      .exp-item::before {
+        top: 7px;
+        width: 1px;
+        height: calc(100% - 20px);
+        background: var(--border);
+      }
+
+      .exp-item::after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: -3px;
+        width: 7px;
+        height: 7px;
+        background: var(--accent);
+      }
+
+      .exp-company {
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+
+      .exp-period {
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+      }
+
+      .exp-role {
+        margin: 8px 0 16px;
+        font-size: 11px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+      }
+
+      .project-links a,
+      .project-more summary {
+        background: var(--surface);
+        border-color: transparent;
+        padding: 5px 9px;
+      }
+
+      .theme-toggle {
+        top: 18px;
+        right: 20px;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .toggle-track {
+        border-radius: 2px;
+      }
+
+      .toggle-knob {
+        border-radius: 1px;
+      }
+
+      html.dark .toggle-knob {
+        transform: translateX(22px);
+      }
+
+      .toggle-icon {
+        display: none;
+      }
+
+      @media print {
+        html,
+        html.dark {
+          --bg: #fff;
+          --surface: #f4f3ef;
+          --border: #d8d5ce;
+          --accent: #8e3323;
+          --accent-dim: #765047;
+          --text-primary: #171815;
+          --text-secondary: #4f514b;
+          --text-muted: #81827d;
+        }
+
+        body {
+          background-image: none;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .page {
+          padding: 48px 32px 64px;
+        }
+
+        .header {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .title-block {
+          padding-top: 0;
+        }
+
+        .body-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0 32px;
+          margin-bottom: 36px;
+          padding-right: 0;
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .page {
+          padding: 38px 20px 52px;
+        }
+
+        h1 {
+          font-size: 58px;
+        }
+
+        .meta-list,
+        .sidebar {
+          grid-template-columns: 1fr;
+        }
+
+        .exp-header,
+        .edu-item {
+          grid-template-columns: 1fr;
+        }
+
+        .exp-period,
+        .edu-year {
+          width: fit-content;
+          text-align: left;
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
-      <span class="toggle-label" id="theme-label">Light</span>
-      <div class="toggle-track">
-        <div class="toggle-knob"></div>
-        <span class="toggle-icon icon-moon">🌙</span>
-        <span class="toggle-icon icon-sun">☀️</span>
-      </div>
-    </div>
+    <button
+      class="theme-toggle"
+      type="button"
+      onclick="toggleTheme()"
+      title="Toggle theme"
+      aria-label="Toggle color theme"
+    >
+      <span class="toggle-label" id="theme-label">Dark</span>
+      <span class="toggle-track" aria-hidden="true">
+        <span class="toggle-knob">&#8203;</span>
+      </span>
+    </button>
 
     <div class="page">
       <!-- HEADER -->
@@ -762,8 +1118,10 @@
         </div>
         <div class="title-block">
           <div class="role-tag">
-            Full-Stack Web Developer | JavaScript / TypeScript / Node.js /
-            WordPress
+            Full-Stack Web Developer
+            <span class="role-stack"
+              >JavaScript / TypeScript / Node.js / WordPress</span
+            >
           </div>
           <ul class="meta-list">
             <li>Ukraine</li>
@@ -780,11 +1138,15 @@
               >
             </li>
             <li>
-              <a href="https://github.com/kostyatitarenko" target="_blank"
-                >github.com/kostyatitarenko</a
+              <a href="https://github.com/kostyatytarenko" target="_blank"
+                >github.com/kostyatytarenko</a
               >
             </li>
-            <li>Telegram / phone available</li>
+            <li>
+              <a href="https://t.me/kostyatytarenko" target="_blank"
+                >t.me/kostyatytarenko</a
+              >
+            </li>
           </ul>
           <a
             class="download-cv"
@@ -922,21 +1284,21 @@
               <strong>10+ years of commercial web experience</strong> delivering
               JavaScript, TypeScript, Node.js, React, Vue, and
               WordPress/CMS-based products. I have shipped
-              <strong>50+ websites, product interfaces, donation shops,
-                e-commerce flows, and campaign platforms</strong
+              <strong
+                >50+ websites, product interfaces, donation shops, e-commerce
+                flows, and campaign platforms</strong
               >
               for German and international clients. Strong in frontend
               architecture, API integrations, CMS-driven systems, responsive QA,
               Core Web Vitals, and turning unclear business requirements into
-              <strong
-                >production-ready, maintainable releases</strong
-              >.
+              <strong>production-ready, maintainable releases</strong>.
             </p>
             <ul class="achievement-list">
               <li>
                 <strong>Modern JS + CMS range:</strong> React, Vue, Nuxt,
-                TypeScript, Node.js, WordPress, REST/GraphQL APIs, custom themes,
-                editable content modules, and API-connected frontend experiences.
+                TypeScript, Node.js, WordPress, REST/GraphQL APIs, custom
+                themes, editable content modules, and API-connected frontend
+                experiences.
               </li>
               <li>
                 <strong>Recent proof:</strong> 30+ production launches at The
@@ -1336,7 +1698,7 @@
             <div class="exp-item">
               <div class="exp-header">
                 <div class="exp-company">
-                  <a href="https://www.nkmz.com" target="_blank">NKMZ</a>
+                  <a href="http://nkmz.com/en/" target="_blank">NKMZ</a>
                 </div>
                 <div class="exp-period">2011 — 2017</div>
               </div>
@@ -1412,20 +1774,22 @@
       const lightPdf = "kostiantyn-tytarenko-cv-light.pdf";
 
       function syncDownloadCv() {
-        const isLight = document.documentElement.classList.contains("light");
-        downloadCv.href = isLight ? lightPdf : darkPdf;
+        const isDark = document.documentElement.classList.contains("dark");
+        downloadCv.href = isDark ? darkPdf : lightPdf;
       }
 
       function toggleTheme() {
-        const isLight = document.documentElement.classList.toggle("light");
-        label.textContent = isLight ? "Dark" : "Light";
-        localStorage.setItem("theme", isLight ? "light" : "dark");
+        const isDark = document.documentElement.classList.toggle("dark");
+        label.textContent = isDark ? "Light" : "Dark";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
         syncDownloadCv();
       }
       (function () {
         const saved = localStorage.getItem("theme");
-        if (saved === "light") {
-          document.documentElement.classList.add("light");
+        if (saved === "dark") {
+          document.documentElement.classList.add("dark");
+          label.textContent = "Light";
+        } else {
           label.textContent = "Dark";
         }
         syncDownloadCv();
