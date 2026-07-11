@@ -690,32 +690,12 @@
 
       /* Print */
       @media print {
-        html,
-        html.light {
-          --bg: #fff;
-          --surface: #f8f8f8;
-          --border: #ddd;
-          --accent: #b8921a;
-          --accent-dim: #9a7815;
-          --text-primary: #111;
-          --text-secondary: #555;
-          --text-muted: #999;
-        }
-        .page {
-          padding: 30px 36px 40px;
-        }
         .download-cv {
           display: none;
         }
-        h1 {
-          font-size: 56px;
-        }
-        h1 span {
-          font-size: 38px;
-        }
       }
 
-      @media (max-width: 680px) {
+      @media screen and (max-width: 680px) {
         .page {
           padding: 32px 24px 48px;
         }
@@ -1023,24 +1003,13 @@
       }
 
       @media print {
-        html,
-        html.dark {
-          --bg: #fff;
-          --surface: #f4f3ef;
-          --border: #d8d5ce;
-          --accent: #8e3323;
-          --accent-dim: #765047;
-          --text-primary: #171815;
-          --text-secondary: #4f514b;
-          --text-muted: #81827d;
-        }
-
-        body {
-          background-image: none;
+        @page {
+          size: 287.19mm 976.89mm;
+          margin: 0;
         }
       }
 
-      @media (max-width: 800px) {
+      @media screen and (max-width: 800px) {
         .page {
           padding: 48px 32px 64px;
         }
@@ -1068,7 +1037,7 @@
         }
       }
 
-      @media (max-width: 520px) {
+      @media screen and (max-width: 520px) {
         .page {
           padding: 38px 20px 52px;
         }
@@ -1785,7 +1754,13 @@
         syncDownloadCv();
       }
       (function () {
-        const saved = localStorage.getItem("theme");
+        const requestedTheme = new URLSearchParams(window.location.search).get(
+          "theme",
+        );
+        const saved =
+          requestedTheme === "dark" || requestedTheme === "light"
+            ? requestedTheme
+            : localStorage.getItem("theme");
         if (saved === "dark") {
           document.documentElement.classList.add("dark");
           label.textContent = "Light";
